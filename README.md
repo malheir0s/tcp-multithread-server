@@ -1,4 +1,4 @@
-# *Multi thread TCP server*
+# *Multi threaded TCP server*
 
 ## *Architecture*
 ### This server starts a thread with a socket which listens forever on a given port. Every time a client connects to the socket, a new thread is created. When a file is requested to the client, it will first be looked on the server's cache. If it is on cache, file will be sent to the client. If not, the file will be searched on the current working directory (which is set when running the server). If the given file is on the directory, the server will open the file and start reading and sending chunks of the file's data to the client. At the end, all these chunks of datas is stored on the variable `cache_files`, which is a dict that follows this pattern: `cache_files = {"name_of_the_file": [chunks of file data]}`.  At last, if the file doesn't exists, an error will be sent in a dict: `{"error": error_msg}` using pickle.
